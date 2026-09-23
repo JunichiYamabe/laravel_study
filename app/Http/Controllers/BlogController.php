@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blogs;
 use Illuminate\Http\Request;
-use App\Http\Requests\BlogRequest;
+// use App\Http\Requests\BlogRequest;
 
 class BlogController extends Controller
 {
@@ -24,14 +24,20 @@ class BlogController extends Controller
     }
 
     //投稿データを保存
-    public function store(BlogRequest $request)
+    public function store(Request $request)
     {
         //バリデーション
-        $validatedData = $request->validatedData([
+        $validatedData = $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        //画像がアップロードされた場合の処理
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $validatedData['image'] = $imagePath;
+        }
 
         //ブログデータを保存
         Blogs::create($validatedData);
