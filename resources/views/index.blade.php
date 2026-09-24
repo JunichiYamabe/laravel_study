@@ -26,7 +26,7 @@
                     <td>{{ $blog->id }}</td>
                     <td>{{ $blog->title }}</td>
                     <td>{{ $blog->content }}</td>
-                    <td>{{ $blog->image }}
+                    <td>
                         @if ($blog->image)
                             <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" width="100">
                         @else
@@ -38,7 +38,6 @@
             @endforeach
         </tbody>
     </table>
-    </ul>
 
 </body>
 
