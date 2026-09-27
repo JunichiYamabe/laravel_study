@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html lang="ja">
+@extends('app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ブログ一覧</title>
-</head>
+@section('title', 'ブログ一覧')
 
-<body>
-    <h1>ブログ一覧</h1>
+@section('content')
+
+<div class="container">
+
+  <h1>ブログ一覧</h1> 
+
+    <a href="{{ route('create') }}" class="btn btn-success mb-3">新規投稿</a>
+
     <table border="1">
         <thead>
             <tr>
@@ -34,11 +34,12 @@
                         @endif
                     </td>
                     <td>{{ $blog->created_at->format('Y-m-d') }}</td>
+                    <td>
+                      <a href="{{ route('detail', $blog->id) }}" class="btn btn-primary">詳細</a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-
-</body>
-
-</html>
+</div>
+@endsection

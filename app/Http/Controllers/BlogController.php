@@ -45,4 +45,13 @@ class BlogController extends Controller
         //リダイレクト
         return redirect()->route('index')->with('success', 'ブログが投稿されました。');
     }
+
+    //詳細画面を表示
+    public function show($id)
+    {
+        //指定されたIDのブログデータを取得
+        $blog = Blogs::findOrFail($id);
+        //取得したデータをビューに渡す
+        return view('detail', compact('blog'));
+    }   
 }

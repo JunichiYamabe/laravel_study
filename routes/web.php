@@ -15,3 +15,5 @@ Route::get('/index', [BlogController::class, 'index'])->name('index');
 Route::get('/create', [BlogController::class, 'create'])->name('create');
 //投稿データ保存処理
 Route::post('/store', [BlogController::class, 'store'])->name('store');
+//詳細画面の表示
+Route::get('/blog/{id}', [BlogController::class, 'show'])->name('detail');
