@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>詳細画面</title>
-</head>
+@extends('app')
 
-<body>
+@section('title', 'ブログ詳細')
+
+@section('content')
+
+<div class = "container">
     <h1>ブログ詳細</h1>
-    <div class = container>
+    <div class = "container">
       <h2>{{ $blog->title }}</h2>
       <p>{{ $blog->content }}</p>
       @if ($blog->image)
@@ -17,5 +14,13 @@
       @endif
       <p>{{  $blog->created_at->format('Y-m-d') }}</p>
     </div>
-</body>
-</html>
+
+    <a href="{{ route('edit', $blog->id) }}" class="btn btn-primary">更新する</a>
+      <form action="{{ route('delete', $blog->id) }}" method="POST" style="display: inline-block;">
+       @csrf
+       @method('DELETE')
+       <button type="submit" class="btn btn-danger" onclick="return confirm('本当に削除しますか？')">削除</button>
+      </form>
+    <a href="{{ route('index') }}" class="btn btn-secondary">一覧に戻る</a>
+</div>
+@endsection

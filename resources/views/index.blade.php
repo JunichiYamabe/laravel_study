@@ -10,6 +10,20 @@
 
     <a href="{{ route('create') }}" class="btn btn-success mb-3">新規投稿</a>
 
+    <form action="{{ route('search') }}" method="GET" class="my-3">
+        <div class="row align-items-center">
+            <div class="col-4">
+                <input type="text" name="title" class="form-control" placeholder="タイトルで検索" value="{{ request('title') }}">
+            </div>
+            <div class="col-4">
+                <input type="date" name="created_at" class="form-control" value="{{ request('created_at') }}">
+            </div>
+            <div class="col-2">
+                <button type="submit" class="btn btn-primary">検索</button>
+            </div>    
+        </div>
+    </form>
+
     <table border="1">
         <thead>
             <tr>
@@ -21,7 +35,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($blogs as $blog)
+            @forelse ($blogs as $blog)
                 <tr>
                     <td>{{ $blog->id }}</td>
                     <td>{{ $blog->title }}</td>
@@ -36,9 +50,19 @@
                     <td>{{ $blog->created_at->format('Y-m-d') }}</td>
                     <td>
                       <a href="{{ route('detail', $blog->id) }}" class="btn btn-primary">詳細</a>
+
+                      <form action="{{ route('delete', $blog->id) }}" method="POST" style="display: inline-block;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('本当に削除しますか？')">削除</button>
+                      </form>
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="4" class="text-center">該当する記事はありません。</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>

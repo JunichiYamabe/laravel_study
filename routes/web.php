@@ -17,3 +17,11 @@ Route::get('/create', [BlogController::class, 'create'])->name('create');
 Route::post('/store', [BlogController::class, 'store'])->name('store');
 //詳細画面の表示
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('detail');
+//更新画面の表示
+Route::get('/blog/{id}/edit', [BlogController::class, 'edit'])->name('edit');
+//更新処理
+Route::put('/blog/{id}', [BlogController::class, 'update'])->name('update');
+// 検索処理
+Route::get('/search', [BlogController::class, 'search'])->name('search');
+// 削除機能
+Route::delete('/blog/{id}', [BlogController::class, 'destroy'])->name('delete');
