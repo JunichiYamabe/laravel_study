@@ -25,3 +25,6 @@ Route::put('/blog/{id}', [BlogController::class, 'update'])->name('update');
 Route::get('/search', [BlogController::class, 'search'])->name('search');
 // 削除機能
 Route::delete('/blog/{id}', [BlogController::class, 'destroy'])->name('delete');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
