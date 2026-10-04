@@ -9,6 +9,8 @@ Route::get('/', function () {
 });
 //サンプルコントローラーのルート
 Route::get('/sample', [SampleController::class, 'showSample']);
+// マイページ
+Route::get('/mypage', [BlogController::class, 'mypage'])->name('mypage');
 //一覧画面の表示
 Route::get('/index', [BlogController::class, 'index'])->name('index');
 //新規投稿画面表示
@@ -28,3 +30,6 @@ Route::delete('/blog/{id}', [BlogController::class, 'destroy'])->name('delete');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+

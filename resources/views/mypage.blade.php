@@ -8,7 +8,10 @@
 
   <h1>ブログ一覧</h1> 
 
+  <div class="d-flex mb-3">
     <a href="{{ route('create') }}" class="btn btn-success mb-3">新規投稿</a>
+    <a href="{{ route('index') }}" class="ms-auto">他の人の投稿</a>
+  </div>
 
     <form action="{{ route('search') }}" method="GET" class="my-3">
         <div class="row align-items-center">
@@ -27,7 +30,7 @@
     <table border="1">
         <thead>
             <tr>
-                <th>投稿者</th>
+                {{-- <th>投稿者</th> --}}
                 <th>タイトル</th>
                 <th>内容</th>
                 <th>画像</th>
@@ -37,7 +40,7 @@
         <tbody>
             @forelse ($blogs as $blog)
                 <tr>
-                    <td>{{ $blog->id }}</td>
+                    {{-- <td>{{ $blog->id }}</td> --}}
                     <td>{{ $blog->title }}</td>
                     <td>{{ $blog->content }}</td>
                     <td>

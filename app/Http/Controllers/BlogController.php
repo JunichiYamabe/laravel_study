@@ -6,9 +6,34 @@ use App\Models\Blogs;
 use Illuminate\Http\Request;
 // use App\Http\Requests\BlogRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
+    // コンストラクタ
+    public function __construct(private Blog $blog = new Blog,)
+    {    }
+    
+    // マイページ画面表示
+    public function mypage()
+    {
+        // ログインユーザーのIDを取得
+        $userId = Auth::id();
+        // ログインユーザーのブログデータを取得
+        $blogs = $this->blog->getOwnBlog($userId);
+        // 取得したデータをビューに渡す
+        return view('mypage', compact('blogs'));
+    }
+
+    // ログインユーザーのブログを取得
+    public function getOwnBlog($user_id)
+    {
+        // blogsテーブルのデータで$user_id(ログインユーザーID)とイコールのデータを取得
+        $blogs = $this->where('user_id', $user_id)->get();
+        // 取得したブログを返却
+        return $blogs;
+    }
+
     //一覧画面表示
     public function index()
     {

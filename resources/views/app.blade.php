@@ -11,7 +11,22 @@
 <body>
   <!-- ヘッダー -->
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 bg-primary-subtitle">
-        <h3>TNGブログ</h3>
+      <div class="col text-center">
+        <a href="{{ route('index') }}" class="text-decoration-none link-body-emphasis">  
+          <h3>TNGブログ</h3>
+        </a>
+       <div style="margin-left: 20px;" > ログインユーザー: {{ Auth::user()->name }}</div>
+
+        <div class="col">
+         <form id="log-out-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+             @csrf
+         </form>
+         <a class="btn btn-outline-danger" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById ('log-out-form').submit();">
+            ログアウト
+         </a>
+        </div> 
+      </div>
+
     </header>
 
     <div class="container">
@@ -36,6 +51,8 @@
       <!-- フッター部 -->  
       <p >&copy; 2024 TNGブログ</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    
 </body>
 
 </html>
